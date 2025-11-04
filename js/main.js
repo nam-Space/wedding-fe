@@ -1,4 +1,5 @@
 
+import { BE_URL } from './env.js';
 
 (function ($) {
     "use strict";
@@ -59,9 +60,6 @@
     });
 
 })(jQuery);
-
-
-const BE_URL = "http://localhost:8081"
 
 // Countdown Timer
 var weddingDate = new Date("2025-12-01T07:00:00").getTime();
