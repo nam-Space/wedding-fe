@@ -150,8 +150,8 @@ async function loadGuestFromQuery() {
             // có ảnh thì hiển thị hoặc tạo mới
             if (!guestImg) {
                 guestImg = document.createElement("img");
-                guestImg.className = "guest-invitation-img wow fadeInUp";
-                guestImg.setAttribute("data-wow-delay", "0.2s");
+                guestImg.className = "guest-invitation-img";
+                // guestImg.setAttribute("data-wow-delay", "0.2s");
                 // chèn ngay dưới h1
                 h1.insertAdjacentElement("afterend", guestImg);
             }

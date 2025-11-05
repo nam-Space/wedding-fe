@@ -1,1 +1,1 @@
-export const BE_URL = "http://localhost:8081"
+export const BE_URL = "https://wedding-be-yel2.onrender.com"
