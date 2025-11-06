@@ -125,7 +125,7 @@ async function loadGuestFromQuery() {
         const fullName = user.fullName || nameFromSlug;
         const imageName = user.image?.trim() || ""; // ảnh có thể trống
         const imageUrl = imageName
-            ? `${BE_URL}${imageName}`
+            ? `${imageName}`
             : "";
         if (user.song) {
             playBackgroundMusic(user.song);
@@ -175,7 +175,7 @@ function playBackgroundMusic(songPath) {
     if (!audio) {
         audio = document.createElement("audio");
         audio.id = "weddingSong";
-        audio.src = `${BE_URL}${songPath}`;
+        audio.src = `${songPath}`;
         audio.loop = true;
         audio.volume = 0.55;
         audio.autoplay = false; // tạm tắt autoplay, ta sẽ gọi play() thủ công
