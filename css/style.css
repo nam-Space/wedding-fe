@@ -463,3 +463,22 @@
         height: auto;
     }
 }
+
+#lightbox {
+    display: flex;
+    flex-direction: column;
+}
+
+.lb-outerContainer {
+    order: 2;
+}
+
+.lb-dataContainer {
+    order: 1;
+}
+
+.lb-close {
+    position: relative;
+    right: -8px;
+    top: -8px;
+}
