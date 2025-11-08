@@ -164,6 +164,16 @@ async function loadGuestFromQuery() {
             guestImg.style.display = "none";
         }
 
+        // === ✅ CẬP NHẬT GOOGLE MAP VÀ ĐỊA CHỈ THEO API ===
+        if (user.lat && user.lng) {
+            const mapIframe = document.querySelector("#weddingLocation iframe");
+            if (mapIframe) {
+                const newSrc = `https://www.google.com/maps?q=${user.lat},${user.lng}&z=15&output=embed`;
+                mapIframe.src = newSrc;
+                console.log("📍 Đã cập nhật bản đồ tới tọa độ:", user.lat, user.lng);
+            }
+        }
+
         // === ✅ CẬP NHẬT GOOGLE MAP THEO API ===
         if (user.location) {
             const locationParagraph = document.querySelector("#weddingLocation p.fs-5.text-dark");
