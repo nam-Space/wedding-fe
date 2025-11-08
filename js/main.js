@@ -1,5 +1,6 @@
 
 import { BE_URL } from './env.js';
+import { ADDRESS, LOCATION, LOCATION_VI } from './location.js';
 
 (function ($) {
     "use strict";
@@ -161,6 +162,28 @@ async function loadGuestFromQuery() {
         } else if (guestImg) {
             // không có ảnh thì ẩn nếu tồn tại
             guestImg.style.display = "none";
+        }
+
+        // === ✅ CẬP NHẬT GOOGLE MAP THEO API ===
+        if (user.location) {
+            const locationParagraph = document.querySelector("#weddingLocation p.fs-5.text-dark");
+            const locationTitle = document.querySelector("#weddingLocation h1.display-2.text-dark");
+
+            if (locationParagraph && locationTitle) {
+                if (user.location === LOCATION.GROOM) {
+                    // Nhà trai
+                    locationParagraph.innerHTML = `
+                        <i class="fas fa-mars" style="color: #2b7fff"></i>
+                        ${LOCATION_VI[user.location]}: ${ADDRESS[user.location]}
+                    `;
+                } else if (user.location === LOCATION.BRIDE) {
+                    // Nhà gái
+                    locationParagraph.innerHTML = `
+                        <i class="fas fa-venus" style="color: #ff5ba5"></i>
+                        ${LOCATION_VI[user.location]}: ${ADDRESS[user.location]}
+                    `;
+                }
+            }
         }
     } catch (err) {
         console.error("Lỗi khi load guest từ query:", err);
