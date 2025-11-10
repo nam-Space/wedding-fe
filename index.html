@@ -2174,6 +2174,193 @@
             ><i class="fa fa-arrow-up"></i
         ></a>
 
+        <!-- 🎇 Hiệu ứng pháo hoa + đàn bồ câu + trái tim nền -->
+        <div
+            id="hearts-bg"
+            style="
+                position: fixed;
+                width: 100%;
+                height: 100%;
+                top: 0;
+                left: 0;
+                z-index: -1;
+            "
+        ></div>
+
+        <!-- 🕊️ Đàn bồ câu bay -->
+        <div
+            id="dove-flock"
+            style="
+                display: none;
+                position: fixed;
+                top: 40%;
+                left: -200px;
+                z-index: 9999;
+            "
+        ></div>
+
+        <!-- Thư viện pháo hoa -->
+        <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+        <!-- Thư viện trái tim -->
+        <script src="https://cdn.jsdelivr.net/npm/tsparticles@2/tsparticles.bundle.min.js"></script>
+
+        <style>
+            @keyframes flyAcross {
+                0% {
+                    transform: translateX(-200px) translateY(0) scale(0.9);
+                    opacity: 0;
+                }
+                10% {
+                    opacity: 1;
+                }
+                50% {
+                    transform: translateX(50vw) translateY(-30px) scale(1);
+                }
+                100% {
+                    transform: translateX(110vw) translateY(20px) scale(1.1);
+                    opacity: 0;
+                }
+            }
+
+            .dove {
+                position: absolute;
+                animation: flyAcross 6s ease-in-out forwards;
+            }
+
+            .dove img {
+                width: 80px;
+                filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.7));
+                transform: scaleX(-1);
+            }
+
+            .dove .hearts {
+                position: absolute;
+                top: 25px;
+                left: 70px;
+                font-size: 32px;
+            }
+        </style>
+
+        <script>
+            document.addEventListener("DOMContentLoaded", () => {
+                // === 🎆 1. PHÁO HOA TRONG 5 GIÂY ===
+                const duration = 5 * 1000;
+                const animationEnd = Date.now() + duration;
+
+                const defaults = {
+                    startVelocity: 30,
+                    spread: 360,
+                    ticks: 60,
+                    zIndex: 9999,
+                };
+
+                function randomInRange(min, max) {
+                    return Math.random() * (max - min) + min;
+                }
+
+                const interval = setInterval(() => {
+                    const timeLeft = animationEnd - Date.now();
+                    if (timeLeft <= 0) {
+                        clearInterval(interval);
+                        startDoveFlock(); // 🕊️ Gọi đàn bồ câu sau pháo hoa
+                        return;
+                    }
+
+                    const particleCount = 50 * (timeLeft / duration);
+                    confetti({
+                        ...defaults,
+                        particleCount,
+                        origin: {
+                            x: randomInRange(0.1, 0.3),
+                            y: Math.random() - 0.2,
+                        },
+                    });
+                    confetti({
+                        ...defaults,
+                        particleCount,
+                        origin: {
+                            x: randomInRange(0.7, 0.9),
+                            y: Math.random() - 0.2,
+                        },
+                    });
+                }, 250);
+
+                // === 🕊️ 2. ĐÀN BỒ CÂU BAY NGANG ===
+                function startDoveFlock() {
+                    const doveContainer = document.getElementById("dove-flock");
+                    doveContainer.style.display = "block";
+
+                    for (let i = 0; i < 5; i++) {
+                        // 5 con bồ câu
+                        const dove = document.createElement("div");
+                        dove.className = "dove";
+                        dove.style.top = `${40 + i * 10}px`;
+                        dove.style.animationDelay = `${i * 0.5}s`;
+
+                        // Ảnh bồ câu trắng thật (SVG đẹp)
+                        dove.innerHTML = `
+        <img src="./img/dive-white.png" alt="dove">
+      `;
+
+                        doveContainer.appendChild(dove);
+                    }
+
+                    // Sau 7 giây → xoá đàn chim, bật nền trái tim
+                    setTimeout(() => {
+                        doveContainer.remove();
+                        startHeartEffect();
+                    }, 7000);
+                }
+
+                // === 💖 3. NỀN TRÁI TIM BAY ===
+                function startHeartEffect() {
+                    tsParticles.load("hearts-bg", {
+                        fpsLimit: 60,
+                        background: { color: "transparent" },
+                        particles: {
+                            number: {
+                                value: 30,
+                                density: { enable: true, area: 800 },
+                            },
+                            color: { value: ["#ff3366", "#ff6699", "#ff99cc"] },
+                            shape: {
+                                type: "char",
+                                character: {
+                                    value: ["❤", "💖", "💞", "💘"],
+                                    font: "Verdana",
+                                    weight: "400",
+                                    fill: true,
+                                },
+                            },
+                            opacity: {
+                                value: { min: 0.5, max: 1 },
+                                animation: {
+                                    enable: true,
+                                    speed: 1,
+                                    minimumValue: 0.3,
+                                },
+                            },
+                            size: {
+                                value: { min: 10, max: 30 },
+                                animation: {
+                                    enable: true,
+                                    speed: 5,
+                                    minimumValue: 5,
+                                },
+                            },
+                            move: {
+                                enable: true,
+                                speed: 2,
+                                direction: "top",
+                                outModes: { default: "out" },
+                            },
+                        },
+                        detectRetina: true,
+                    });
+                }
+            });
+        </script>
+
         <!-- JavaScript Libraries -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
