@@ -143,7 +143,7 @@ async function loadGuestFromQuery() {
             h1.className = "text-primary display-1";
             headerBlock.prepend(h1);
         }
-        h1.textContent = `Chào bạn! ${fullName}`;
+        h1.textContent = `Hello, ${fullName}!`;
 
         // xử lý ảnh đại diện (nếu có)
         let guestImg = headerBlock.querySelector("img.guest-invitation-img");
