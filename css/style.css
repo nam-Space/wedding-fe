@@ -482,3 +482,20 @@
     right: -8px;
     top: -8px;
 }
+
+.bride-tab span,
+.groom-tab span {
+    width: 150px;
+}
+
+@media (max-width: 575px) {
+    .bride-tab,
+    .groom-tab {
+        flex-basis: 50%;
+    }
+
+    .bride-tab span,
+    .groom-tab span {
+        width: 100%;
+    }
+}
