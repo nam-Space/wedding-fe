@@ -63,7 +63,7 @@ import { ADDRESS, LOCATION, LOCATION_VI } from './location.js';
 })(jQuery);
 
 // Countdown Timer
-var weddingDate = new Date("2025-11-30T08:00:00").getTime();
+var weddingDate = new Date("2025-12-01T09:00:00").getTime();
 
 var countdown = setInterval(function () {
     var now = new Date().getTime();
