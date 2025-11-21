@@ -506,3 +506,51 @@
         flex-direction: row !important;
     }
 }
+
+.qrContainer {
+    display: flex;
+    align-items: center;
+    gap: 200px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.bride-text,
+.groom-text {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+    gap: 10px;
+    font-size: 24px;
+}
+
+@media (min-width: 576px) and (max-width: 767px) {
+    .qrContainer {
+        gap: 100px;
+    }
+}
+
+@media (min-width: 450px) and (max-width: 575px) {
+    .qrContainer {
+        gap: 50px;
+    }
+
+    .bride-text,
+    .groom-text {
+        font-size: 18px;
+        gap: 3px;
+    }
+}
+
+@media (max-width: 449px) {
+    .qrContainer {
+        gap: 30px;
+    }
+
+    .bride-text,
+    .groom-text {
+        font-size: 13px;
+        gap: 3px;
+    }
+}
